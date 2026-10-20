@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { accessories, kr, products } from "../data/products";
+import { kr, products } from "../data/products";
 import { company } from "../data/company";
 
 const VAT = 1.25;
@@ -13,25 +13,26 @@ const marginRows = [
   { label: "Midnight Rider · 6 g", product: byName("Midnight Rider") },
 ].map(({ label, product }) => {
   const net = product.retail! / VAT;
-  const profit = net - product.wholesale;
-  return { label, wholesale: product.wholesale, retail: product.retail!, profit: Math.round(profit), pct: Math.round((profit / net) * 100) };
+  const profit = net - product.wholesale!;
+  return { label, wholesale: product.wholesale!, retail: product.retail!, profit: Math.round(profit), pct: Math.round((profit / net) * 100) };
 });
 
-const priceRows = [
-  ...products.map((p) => ({
-    name: `${p.name} · ${p.meta.split(" · ").at(-1)}`,
-    type: p.meta.split(" · ").slice(1, -1).join(" · "),
-    wholesale: p.wholesale,
+const priceRows = products
+  .filter((p) => p.wholesale !== undefined)
+  .map((p) => ({
+    name: p.size ? `${p.name} · ${p.size}` : p.name,
+    type: [p.format, p.strain].filter(Boolean).join(" · "),
+    wholesale: p.wholesale!,
     retail: p.retail,
-  })),
-  ...accessories.map((a) => ({ ...a, retail: undefined })),
-];
+  }));
 
-const nav = [
+const subnav = [
   { href: "#opstart", label: "Opstartspakke" },
+  { href: "#priser", label: "Priser" },
   { href: "#avance", label: "Avance" },
+  { href: "#bestilling", label: "På bestilling" },
   { href: "#vilkaar", label: "Vilkår" },
-  { href: "/", label: "Til forbrugersiden" },
+  { href: "#kontakt", label: "Kontakt" },
 ];
 
 const tips = [
@@ -45,8 +46,6 @@ const tips = [
 <BaseLayout
   title="For forhandlere – Mister Mellow"
   description="Bliv forhandler af Mister Mellow. Opstartspakke inkl. display, høj avance, levering på 1–2 dage."
-  nav={nav}
-  cta={{ href: "#kontakt", label: "Kontakt os" }}
 >
   <section class="page-hero">
     <img class="page-hero-sun" src="/img/logo-navy.png" alt="" aria-hidden="true" />
@@ -60,6 +59,12 @@ const tips = [
       </div>
     </div>
   </section>
+
+  <nav class="subnav" aria-label="Forhandlersektioner">
+    <div class="wrap">
+      {subnav.map((s) => <a href={s.href}>{s.label}</a>)}
+    </div>
+  </nav>
 
   <section id="opstart">
     <div class="wrap">

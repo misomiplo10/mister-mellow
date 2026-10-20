@@ -16,9 +16,9 @@ npm run preview  # se build lokalt
 ```
 src/
   data/         produkter, lab-resultater og firmaoplysninger (ret indhold her)
-  components/   Header, Footer, AgeGate, ProductCard
+  components/   Header, Footer, AgeGate, ProductCard, ProductVisual, SectionTitle
   layouts/      BaseLayout (head, fonte, header/footer, aldersbekræftelse)
-  pages/        index.astro (forbrugere), forhandler.astro (B2B)
+  pages/        index.astro (forside), kollektion.astro (alle produkter + filter), forhandler.astro (B2B)
   styles/       global.css (farver og typografi som CSS-variabler i :root)
   scripts/      main.ts (aldersbekræftelse, menu, produktfilter, animationer)
 public/
@@ -31,6 +31,8 @@ public/
 - **Ny eller ændret produkt/pris:** `src/data/products.ts`. Både produktkort, prisliste og avanceberegning på forhandlersiden læses herfra.
 - **Nye lab-resultater:** `src/data/lab.ts`, og læg PDF'en i `public/docs/`.
 - **Kontaktoplysninger:** `src/data/company.ts`.
+- **FAQ:** `src/data/faq.ts`.
+- **Fremhævede produkter på forsiden:** sæt `featured: true` i `products.ts`.
 
 ## Noter
 

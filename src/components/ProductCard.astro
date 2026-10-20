@@ -1,42 +1,32 @@
 ---
-import { kr, type Product } from "../data/products";
+import ProductVisual from "./ProductVisual.astro";
+import { kr, metaLine, type Product } from "../data/products";
 
 interface Props {
   product: Product;
 }
 
 const { product: p } = Astro.props;
-const v = p.visual;
 ---
 
-<article class="product reveal" data-cat={p.category}>
-  <div class={`product-media bg-${p.tint}`}>
-    {v.kind === "pouch" && (
-      <div class={`pouch pouch-${v.color}`}>
-        <img src={`/img/logo-${v.logo}.png`} alt="" />
-        <span class="label">{p.name}</span>
-      </div>
-    )}
-    {v.kind === "tubes" && (
-      <div class="tube-duo">
-        {[0, 1].map(() => (
-          <div class={`tube tube-${v.color}`}>
-            <img src="/img/logo-navy.png" alt="" />
-            <span class="label">{p.name}</span>
-          </div>
-        ))}
-      </div>
-    )}
-    {v.kind === "photo" && <img src={v.src} alt={v.alt} loading="lazy" />}
+<article class="pcard" data-cat={p.category}>
+  <div class={`pcard-media bg-${p.tint}`}>
+    {p.onRequest && <span class="pcard-flag">På bestilling</span>}
+    <ProductVisual visual={p.visual} />
   </div>
-  <div class="product-body">
-    <span class="product-meta">{p.meta}</span>
+  <div class="pcard-body">
+    <span class="pcard-brand">Mister Mellow</span>
     <h3>{p.name}</h3>
+    <span class="pcard-meta">{metaLine(p)}</span>
     <p>{p.description}</p>
-    {p.retail ? (
-      <div class="price">Vejl. udsalgspris <strong>{kr(p.retail)}</strong></div>
-    ) : (
-      <div class="price">Spørg i din butik <strong>{p.meta.split(" · ").at(-1)}</strong></div>
-    )}
+    <div class="pcard-price">
+      {p.retail ? (
+        <span><small>Vejl.</small> {kr(p.retail)}</span>
+      ) : (
+        <span class="muted">{p.onRequest ? "Pris på forespørgsel" : "Spørg i butikken"}</span>
+      )}
+      {p.size && <span class="chip">{p.size}</span>}
+    </div>
+    <a class="btn btn-navy btn-block" href="/#find">Find i butik</a>
   </div>
 </article>

@@ -26,9 +26,9 @@ if (gate && !ageOk) {
   });
 }
 
-// Header background once scrolled past the top
+// Header shadow once scrolled past the top
 const header = document.querySelector<HTMLElement>(".site-header")!;
-const onScroll = () => header.classList.toggle("scrolled", window.scrollY > 40);
+const onScroll = () => header.classList.toggle("scrolled", window.scrollY > 10);
 onScroll();
 window.addEventListener("scroll", onScroll, { passive: true });
 
@@ -45,15 +45,38 @@ header.querySelectorAll(".nav-links a").forEach((a) =>
   }),
 );
 
-// Product filter
+// Product filter (kollektion page); the active category lives in ?kategori=
 const filters = document.querySelectorAll<HTMLButtonElement>(".filter");
-filters.forEach((btn) =>
+const count = document.getElementById("count");
+const applyFilter = (cat: string) => {
+  let shown = 0;
+  filters.forEach((b) => b.classList.toggle("active", b.dataset.filter === cat));
+  document.querySelectorAll<HTMLElement>(".product-grid .pcard").forEach((p) => {
+    p.hidden = cat !== "all" && p.dataset.cat !== cat;
+    if (!p.hidden) shown++;
+  });
+  if (count) count.textContent = String(shown);
+};
+if (filters.length) {
+  const initial = new URLSearchParams(location.search).get("kategori");
+  if (initial && [...filters].some((b) => b.dataset.filter === initial)) applyFilter(initial);
+  filters.forEach((btn) =>
+    btn.addEventListener("click", () => {
+      const cat = btn.dataset.filter!;
+      applyFilter(cat);
+      const url = new URL(location.href);
+      if (cat === "all") url.searchParams.delete("kategori");
+      else url.searchParams.set("kategori", cat);
+      history.replaceState(null, "", url);
+    }),
+  );
+}
+
+// Carousel arrows scroll their rail by one visible page
+document.querySelectorAll<HTMLButtonElement>(".rail-btn").forEach((btn) =>
   btn.addEventListener("click", () => {
-    filters.forEach((b) => b.classList.toggle("active", b === btn));
-    const cat = btn.dataset.filter;
-    document.querySelectorAll<HTMLElement>(".product").forEach((p) => {
-      p.hidden = cat !== "all" && p.dataset.cat !== cat;
-    });
+    const rail = document.getElementById(btn.dataset.rail!);
+    if (rail) rail.scrollBy({ left: Number(btn.dataset.dir) * rail.clientWidth * 0.9, behavior: "smooth" });
   }),
 );
 

@@ -1,0 +1,13 @@
+---
+interface Props {
+  title: string;
+  link?: { href: string; label: string };
+}
+
+const { title, link } = Astro.props;
+---
+
+<div class="section-bar">
+  <h2 class="sticker">{title}</h2>
+  {link && <a class="see-all" href={link.href}>{link.label} →</a>}
+</div>
