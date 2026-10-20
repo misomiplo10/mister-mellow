@@ -793,6 +793,24 @@ h1, h2, h3 { margin: 0; line-height: 1.02; }
 .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 
 /* ---------- retailer page ---------- */
+.page-hero ~ section { padding: clamp(40px, 6vw, 72px) 0; }
+.section-head { margin-bottom: 28px; }
+.ticks { list-style: none; padding: 0; margin: 20px 0 28px; display: grid; gap: 10px; }
+.ticks li { display: flex; gap: 12px; align-items: flex-start; }
+.ticks li::before {
+  content: "✓";
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--orange);
+  color: var(--orange);
+  font-size: 12px;
+  font-weight: 900;
+  margin-top: 2px;
+}
 .page-hero {
   color: var(--navy);
   padding: clamp(50px, 7vw, 90px) 0 40px;
