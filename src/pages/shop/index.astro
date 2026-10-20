@@ -14,7 +14,8 @@ const filters = [{ id: "all", label: "Alle" }, ...categories.map((c) => ({ id: c
   <section class="block page-top">
     <div class="wrap">
       <SectionTitle title="Shop" />
-      <p class="page-lead">Find din mellow og få den sendt hjem. Alle priser er inkl. moms – kun til dig over 18 år.</p>
+      <p class="page-lead">Håndplukket Cali-flower, pre-rolls og hash med THC-A fra potente sorter – udvalgt for aroma, smag og styrke, og testet af et uafhængigt laboratorium, før det kommer i posen. Find din mellow og få den sendt hjem.</p>
+      <p class="page-note">Alle priser er inkl. moms – kun til dig over 18 år.</p>
       <div class="filters" role="group" aria-label="Filtrér produkter">
         {filters.map((f, i) => (
           <button class:list={["filter", { active: i === 0 }]} data-filter={f.id}>{f.label}</button>

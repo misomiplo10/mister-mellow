@@ -3,11 +3,13 @@ import { categories } from "../data/products";
 import { company } from "../data/company";
 
 const links = [
-  { href: "/#lab", label: "Lab-rapporter" },
-  { href: "/#om", label: "Om os" },
-  { href: "/#faq", label: "FAQ" },
-  { href: "/#find", label: "Find os" },
+  { href: "/lab-rapporter", label: "Lab-rapporter" },
+  { href: "/om-os", label: "Om os" },
+  { href: "/faq", label: "FAQ" },
+  { href: "/find-os", label: "Find os" },
 ];
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const current = (href: string) => (path === href ? "page" : undefined);
 ---
 
 <header class="site-header">
@@ -20,14 +22,14 @@ const links = [
     <a class="brand" href="/" aria-label="Mister Mellow forside"><img src="/img/logo-orange.png" alt="Mister Mellow" /></a>
     <ul class="nav-links">
       <li class="has-menu">
-        <a href="/shop">Shop <span class="caret" aria-hidden="true">▾</span></a>
+        <a href="/shop" aria-current={path.startsWith("/shop") ? "page" : undefined}>Shop <span class="caret" aria-hidden="true">▾</span></a>
         <ul class="submenu">
           {categories.map((c) => <li><a href={`/shop?kategori=${c.id}`}>{c.label}</a></li>)}
           <li><a href="/shop">Se alle</a></li>
         </ul>
       </li>
-      {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
-      <li class="show-md"><a href="/forhandler">For forhandlere</a></li>
+      {links.map((l) => <li><a href={l.href} aria-current={current(l.href)}>{l.label}</a></li>)}
+      <li class="show-md"><a href="/forhandler" aria-current={current("/forhandler")}>For forhandlere</a></li>
     </ul>
     <div class="nav-actions">
       <a class="icon-btn" href={company.instagramUrl} target="_blank" rel="noopener" aria-label="Instagram">

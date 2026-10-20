@@ -28,3 +28,4 @@ const { visual: v } = Astro.props;
   <div class="lighter"><img src="/img/logo-navy.png" alt="" /></div>
 )}
 {v.kind === "photo" && <img class="photo" src={v.src} alt={v.alt} loading="lazy" />}
+{v.kind === "packshot" && <img class="packshot" src={v.src} alt={v.alt} loading="lazy" />}

@@ -13,9 +13,10 @@ import { company } from "../data/company";
         <h4>Navigation</h4>
         <ul>
           <li><a href="/shop">Shop</a></li>
-          <li><a href="/#lab">Lab-rapporter</a></li>
-          <li><a href="/#om">Om os</a></li>
-          <li><a href="/#faq">FAQ</a></li>
+          <li><a href="/lab-rapporter">Lab-rapporter</a></li>
+          <li><a href="/om-os">Om os</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/find-os">Find os</a></li>
         </ul>
       </div>
       <div>
@@ -35,8 +36,18 @@ import { company } from "../data/company";
         </ul>
       </div>
     </div>
+    <div class="footer-disclaimer">
+      <div>
+        <h4>Vores politik</h4>
+        <p>Hos Mister Mellow får du lab-testede produkter i høj kvalitet, ærlige tal på hver pakke og personlig service – fra os til dig.</p>
+      </div>
+      <div>
+        <h4>Disclaimer</h4>
+        <p>Mister Mellows produkter er naturlige cannabisprodukter og skal håndteres med omtanke. De indeholder ikke tobak og er ikke beregnet til at forebygge, behandle eller helbrede sygdom. Kun til personer over 18 år. Opbevares utilgængeligt for børn.</p>
+      </div>
+    </div>
     <div class="footer-bottom">
-      <span>© {new Date().getFullYear()} {company.legalName} · CVR {company.cvr}</span>
+      <span>© {new Date().getFullYear()} {company.legalName} · CVR {company.cvr} · <a href="/privatlivspolitik">Cookies og privatlivspolitik</a></span>
       <span>Kun 18+ · Opbevares utilgængeligt for børn</span>
     </div>
   </div>

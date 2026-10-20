@@ -182,7 +182,8 @@ h1, h2, h3 { margin: 0; line-height: 1.02; }
   text-transform: uppercase;
   border-radius: 6px;
 }
-.nav-links > li > a:hover { color: var(--orange); }
+.nav-links > li > a:hover,
+.nav-links > li > a[aria-current="page"] { color: var(--orange); }
 .caret { font-size: 10px; margin-left: 2px; }
 .has-menu { position: relative; }
 .submenu {
@@ -763,6 +764,20 @@ h1, h2, h3 { margin: 0; line-height: 1.02; }
 }
 .faq details[open] .faq-ico { transform: rotate(90deg); background: var(--orange); }
 .faq details p { margin: 0; padding: 0 22px 20px; color: rgba(253, 243, 228, 0.82); }
+.faq details ul { margin: 0; padding: 0 22px 20px 42px; color: rgba(253, 243, 228, 0.82); display: grid; gap: 6px; }
+.faq-group + .faq-group { margin-top: 40px; }
+.faq-group-title {
+  display: inline-block;
+  margin: 0 0 14px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: var(--cream);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--navy);
+}
 
 /* ---------- cta band ---------- */
 .cta-band { background: var(--orange); color: var(--navy); padding: clamp(44px, 6vw, 72px) 0; margin-top: 40px; }
@@ -774,6 +789,7 @@ h1, h2, h3 { margin: 0; line-height: 1.02; }
 /* ---------- shop page ---------- */
 .page-top { padding-top: clamp(40px, 5vw, 64px); }
 .page-lead { color: var(--navy); font-size: 18px; max-width: 680px; margin: 0 0 26px; }
+.page-note { color: var(--muted); font-size: 14px; margin: -14px 0 26px; }
 .filters { display: flex; flex-wrap: wrap; gap: 8px; }
 .filter {
   font: inherit;
@@ -972,7 +988,7 @@ h1, h2, h3 { margin: 0; line-height: 1.02; }
 }
 .subnav a:hover { background: var(--navy); color: var(--cream); }
 #opstart, #priser, #avance, #bestilling, #vilkaar, #kontakt { scroll-margin-top: 180px; }
-#lab, #find, #faq, #om { scroll-margin-top: 120px; }
+
 
 /* ---------- cart button + drawer ---------- */
 .btn-ghost-light { border-color: rgba(253, 243, 228, 0.6); color: var(--cream); }
@@ -1196,6 +1212,24 @@ h1, h2, h3 { margin: 0; line-height: 1.02; }
 .footer-grid a { text-decoration: none; opacity: 0.85; }
 .footer-grid a:hover { opacity: 1; color: var(--orange); }
 .footer-grid p { margin: 0; opacity: 0.75; font-size: 15px; max-width: 300px; }
+.footer-disclaimer {
+  border-top: 1px solid rgba(253, 243, 228, 0.18);
+  padding: 22px 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  font-size: 14px;
+}
+.footer-disclaimer h4 {
+  margin: 0 0 8px;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+.footer-disclaimer p { margin: 0; opacity: 0.75; }
+@media (max-width: 720px) { .footer-disclaimer { grid-template-columns: 1fr; } }
+.footer-bottom a { color: inherit; }
 .footer-bottom {
   border-top: 1px solid rgba(253, 243, 228, 0.18);
   padding-top: 22px;
@@ -1326,4 +1360,52 @@ body.locked { overflow: hidden; }
   .lab-table td:first-child { font-size: 15px; }
   .faq summary { font-size: 15px; padding: 16px 18px; }
   .section-bar { flex-wrap: wrap; }
+}
+
+/* ---------- legal pages ---------- */
+.legal { max-width: 760px; color: var(--navy); }
+.legal h2 { font-size: 20px; margin: 36px 0 10px; }
+.legal h3 { font-size: 16px; margin: 20px 0 6px; }
+.legal p, .legal li { line-height: 1.6; }
+.legal ul { padding-left: 22px; display: grid; gap: 6px; }
+.legal a { color: var(--navy); }
+
+/* ---------- THC-A info on product pages ---------- */
+.thca-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 28px; align-items: start; }
+.thca-copy { background: var(--cream); color: var(--navy); border-radius: 8px; padding: clamp(22px, 3vw, 36px); }
+.thca-copy h3 { font-family: var(--display); text-transform: uppercase; font-size: 22px; margin: 28px 0 10px; }
+.thca-copy > p:first-child { margin-top: 0; }
+.thca-copy h4 { font-size: 15px; margin: 14px 0 4px; }
+.thca-copy p { margin: 0 0 10px; line-height: 1.6; color: var(--muted); }
+.thca-faq h3 {
+  display: inline-block;
+  margin: 0 0 14px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: var(--cream);
+  color: var(--navy);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+@media (max-width: 900px) { .thca-grid { grid-template-columns: 1fr; } }
+
+.faq-intro { background: var(--cream); color: var(--navy); border-radius: 8px; padding: clamp(22px, 3vw, 36px); max-width: 820px; margin-bottom: 32px; }
+.faq-intro h2 { font-family: var(--display); text-transform: uppercase; font-size: clamp(24px, 3vw, 32px); line-height: 1.05; margin: 0 0 8px; }
+.faq-intro-kicker { font-weight: 700; }
+.faq-intro p { margin: 0 0 12px; line-height: 1.6; color: var(--muted); }
+.faq-intro p:last-child { margin-bottom: 0; }
+
+/* ---------- packshots (transparent cut-outs of the real packaging) ---------- */
+.cat-media { position: relative; }
+.packshot {
+  position: absolute;
+  inset: 10%;
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+  /* navy-tinted shadow so the cut-outs sit on the pastel cards instead of floating on grey */
+  filter: drop-shadow(0 14px 18px rgba(15, 33, 103, 0.2)) drop-shadow(0 3px 4px rgba(15, 33, 103, 0.12));
+  transition: transform 0.5s ease;
 }

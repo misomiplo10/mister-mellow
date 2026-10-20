@@ -3,6 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import ProductCard from "../../components/ProductCard.astro";
 import ProductVisual from "../../components/ProductVisual.astro";
 import SectionTitle from "../../components/SectionTitle.astro";
+import ThcaInfo from "../../components/ThcaInfo.astro";
 import { cartData, categoryLabel, isBuyable, kr, metaLine, products, type Product } from "../../data/products";
 import { labName } from "../../data/lab";
 
@@ -60,7 +61,7 @@ const related = [...sameCategory, ...products.filter((x) => x.slug !== p.slug &&
               <p class="pdp-note">
                 {p.onRequest ? "Fremstilles kun på bestilling og kan ikke købes i webshoppen." : "Produktet kommer snart i webshoppen. Spørg efter det i din butik."}
               </p>
-              <a class="btn btn-navy" href="/#find">Find i butik</a>
+              <a class="btn btn-navy" href="/find-os">Find i butik</a>
             </div>
           )}
 
@@ -77,7 +78,7 @@ const related = [...sameCategory, ...products.filter((x) => x.slug !== p.slug &&
             </details>
             <details>
               <summary>Lab-rapporter<span class="faq-ico" aria-hidden="true">›</span></summary>
-              <p>Alt testes af {labName}, før det kommer i posen. <a href="/#lab">Se rapporterne</a>.</p>
+              <p>Alt testes af {labName}, før det kommer i posen. <a href="/lab-rapporter">Se rapporterne</a>.</p>
             </details>
             <details>
               <summary>Ansvarligt brug<span class="faq-ico" aria-hidden="true">›</span></summary>
@@ -88,6 +89,8 @@ const related = [...sameCategory, ...products.filter((x) => x.slug !== p.slug &&
       </div>
     </div>
   </section>
+
+  {p.category !== "accessory" && <ThcaInfo />}
 
   {related.length > 0 && (
     <section class="block">

@@ -1,12 +1,13 @@
-export type Category = "flower" | "preroll" | "hash" | "edible" | "accessory";
+export type Category = "flower" | "preroll" | "hash" | "accessory";
 export type Tint = "lavender" | "peach" | "pink" | "butter";
 
-/** How a product is pictured: drawn packaging in brand colours or a cut-out photo. */
+/** How a product is pictured: drawn packaging in brand colours, a photo, or a transparent packshot of the real packaging. */
 export type Visual =
   | { kind: "pouch"; color: "purple" | "orange"; logo: "cream" | "navy"; label: string }
   | { kind: "tubes"; color: "pink" | "yellow"; label: string }
   | { kind: "lighter" }
-  | { kind: "photo"; src: string; alt: string };
+  | { kind: "photo"; src: string; alt: string }
+  | { kind: "packshot"; src: string; alt: string };
 
 export interface Product {
   slug: string;
@@ -35,10 +36,9 @@ export interface CategoryInfo {
 
 export const categories: CategoryInfo[] = [
   { id: "flower", label: "Flower", tint: "lavender", visual: { kind: "photo", src: "/img/flower-trio.jpg", alt: "" } },
-  { id: "preroll", label: "Pre-rolls", tint: "pink", visual: { kind: "tubes", color: "pink", label: "" } },
+  { id: "preroll", label: "Pre-rolls", tint: "pink", visual: { kind: "packshot", src: "/img/tube-daydream.webp", alt: "" } },
   { id: "hash", label: "Hash", tint: "peach", visual: { kind: "photo", src: "/img/fresh-frozen.jpg", alt: "" } },
-  { id: "edible", label: "Edibles", tint: "butter", visual: { kind: "photo", src: "/img/chocolate-cone.jpg", alt: "" } },
-  { id: "accessory", label: "Tilbehør", tint: "peach", visual: { kind: "lighter" } },
+  { id: "accessory", label: "Tilbehør", tint: "peach", visual: { kind: "packshot", src: "/img/lighter.webp", alt: "" } },
 ];
 
 export const products: Product[] = [
@@ -54,7 +54,7 @@ export const products: Product[] = [
     retail: 769,
     featured: true,
     tint: "lavender",
-    visual: { kind: "pouch", color: "purple", logo: "cream", label: "Midnight Rider" },
+    visual: { kind: "packshot", src: "/img/pouch-midnight-rider.webp", alt: "Midnight Rider pose" },
   },
   {
     slug: "sunday-cruise",
@@ -68,7 +68,7 @@ export const products: Product[] = [
     retail: 259,
     featured: true,
     tint: "peach",
-    visual: { kind: "pouch", color: "orange", logo: "navy", label: "Sunday Cruise" },
+    visual: { kind: "packshot", src: "/img/pouch-sunday-cruise.webp", alt: "Sunday Cruise pose" },
   },
   {
     slug: "daydream",
@@ -82,7 +82,7 @@ export const products: Product[] = [
     retail: 125,
     featured: true,
     tint: "pink",
-    visual: { kind: "tubes", color: "pink", label: "Daydream" },
+    visual: { kind: "packshot", src: "/img/tube-daydream.webp", alt: "Daydream pre-roll" },
   },
   {
     slug: "sunrise",
@@ -96,7 +96,7 @@ export const products: Product[] = [
     retail: 125,
     featured: true,
     tint: "butter",
-    visual: { kind: "tubes", color: "yellow", label: "Sunrise" },
+    visual: { kind: "packshot", src: "/img/tube-sunrise.webp", alt: "Sunrise pre-roll" },
   },
   {
     slug: "fresh-frozen",
@@ -123,16 +123,6 @@ export const products: Product[] = [
     visual: { kind: "photo", src: "/img/dry-sift.jpg", alt: "Dry Sift hash" },
   },
   {
-    slug: "chocolate-cone",
-    name: "Chocolate Cone",
-    category: "edible",
-    format: "Edible",
-    description: "Infused med THC-A. Fremstilles udelukkende på bestilling.",
-    onRequest: true,
-    tint: "butter",
-    visual: { kind: "photo", src: "/img/chocolate-cone.jpg", alt: "Chocolate Cone" },
-  },
-  {
     slug: "mister-mellow-lighter",
     name: "Mister Mellow Lighter",
     category: "accessory",
@@ -140,7 +130,7 @@ export const products: Product[] = [
     description: "Knaldorange BIC-lighter med Mister Mellow-logoet på begge sider.",
     wholesale: 9,
     tint: "peach",
-    visual: { kind: "lighter" },
+    visual: { kind: "packshot", src: "/img/lighter.webp", alt: "Mister Mellow lighter" },
   },
 ];
 
