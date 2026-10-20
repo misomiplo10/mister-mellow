@@ -28,6 +28,3 @@ const { visual: v } = Astro.props;
   <div class="lighter"><img src="/img/logo-navy.png" alt="" /></div>
 )}
 {v.kind === "photo" && <img class="photo" src={v.src} alt={v.alt} loading="lazy" />}
-{v.kind === "label" && (
-  <div class="type-label">{v.lines.map((l) => <span>{l}</span>)}</div>
-)}

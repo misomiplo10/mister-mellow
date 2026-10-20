@@ -18,9 +18,9 @@ src/
   data/         produkter, lab-resultater og firmaoplysninger (ret indhold her)
   components/   Header, Footer, AgeGate, ProductCard, ProductVisual, SectionTitle
   layouts/      BaseLayout (head, fonte, header/footer, aldersbekræftelse)
-  pages/        index.astro (forside), kollektion.astro (alle produkter + filter), forhandler.astro (B2B)
+  pages/        index.astro (forside), shop/ (oversigt + en side pr. produkt), kurv.astro (kurv og kasse), forhandler.astro (B2B)
   styles/       global.css (farver og typografi som CSS-variabler i :root)
-  scripts/      main.ts (aldersbekræftelse, menu, produktfilter, animationer)
+  scripts/      main.ts (aldersbekræftelse, menu, produktfilter, animationer), cart.ts (kurv i localStorage + kurv-skuffe)
 public/
   img/          optimerede billeder, logo-udskæringer og himmelbaggrund
   docs/         katalog og COA-rapporter (PDF)
@@ -33,6 +33,13 @@ public/
 - **Kontaktoplysninger:** `src/data/company.ts`.
 - **FAQ:** `src/data/faq.ts`.
 - **Fremhævede produkter på forsiden:** sæt `featured: true` i `products.ts`.
+
+## Shop
+
+- Et produkt kan købes, når det har en `retail`-pris og ikke er `onRequest`. Ellers vises "Pris kommer snart" / "På bestilling".
+- Kurven gemmes i browseren (localStorage). Der er ingen backend endnu.
+- **Betaling er ikke koblet på.** Kassen validerer formularen og viser en besked om, at webshoppen åbner snart – der sendes ingen ordre.
+  Før lancering skal der vælges en betalingsudbyder, der accepterer THC-A-produkter, samt en løsning til aldersverifikation (fx MitID).
 
 ## Noter
 

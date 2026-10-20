@@ -20,13 +20,14 @@ const links = [
     <a class="brand" href="/" aria-label="Mister Mellow forside"><img src="/img/logo-orange.png" alt="Mister Mellow" /></a>
     <ul class="nav-links">
       <li class="has-menu">
-        <a href="/kollektion">Kollektionen <span class="caret" aria-hidden="true">▾</span></a>
+        <a href="/shop">Shop <span class="caret" aria-hidden="true">▾</span></a>
         <ul class="submenu">
-          {categories.map((c) => <li><a href={`/kollektion?kategori=${c.id}`}>{c.label}</a></li>)}
-          <li><a href="/kollektion">Se alle</a></li>
+          {categories.map((c) => <li><a href={`/shop?kategori=${c.id}`}>{c.label}</a></li>)}
+          <li><a href="/shop">Se alle</a></li>
         </ul>
       </li>
       {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      <li class="show-md"><a href="/forhandler">For forhandlere</a></li>
     </ul>
     <div class="nav-actions">
       <a class="icon-btn" href={company.instagramUrl} target="_blank" rel="noopener" aria-label="Instagram">
@@ -34,7 +35,13 @@ const links = [
           <rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1" fill="currentColor"></circle>
         </svg>
       </a>
-      <a class="btn btn-orange btn-sm" href="/forhandler">Forhandler</a>
+      <a class="btn btn-ghost-light btn-sm hide-md" href="/forhandler">Forhandler</a>
+      <button class="cart-btn" data-cart-open aria-label="Åbn kurv">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M6 7h12l-1 13H7L6 7z"></path><path d="M9 7a3 3 0 0 1 6 0"></path>
+        </svg>
+        <span class="cart-count" data-cart-count hidden>0</span>
+      </button>
       <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </nav>

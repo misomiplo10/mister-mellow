@@ -45,7 +45,7 @@ header.querySelectorAll(".nav-links a").forEach((a) =>
   }),
 );
 
-// Product filter (kollektion page); the active category lives in ?kategori=
+// Product filter (shop page); the active category lives in ?kategori=
 const filters = document.querySelectorAll<HTMLButtonElement>(".filter");
 const count = document.getElementById("count");
 const applyFilter = (cat: string) => {

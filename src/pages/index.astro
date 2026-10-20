@@ -12,7 +12,7 @@ const featured = products.filter((p) => p.featured);
 
 const promos = [
   { eyebrow: "Lab-testet", big: "25,12 %", small: "THC-A · Amnesia Haze", href: "/#lab", cta: "Se rapporterne", tone: "navy" },
-  { eyebrow: "Pre-rolls", big: "1 g", small: "Daydream & Sunrise · håndrullet", href: "/kollektion?kategori=preroll", cta: "Se pre-rolls", tone: "pink" },
+  { eyebrow: "Pre-rolls", big: "1 g", small: "Daydream & Sunrise · håndrullet", href: "/shop?kategori=preroll", cta: "Se pre-rolls", tone: "pink" },
   { eyebrow: "For butikker", big: "51 %", small: "dækningsgrad på pre-rolls", href: "/forhandler", cta: "Bliv forhandler", tone: "orange" },
 ];
 ---
@@ -28,7 +28,7 @@ const promos = [
         <h1 class="hero-title">Not your <span class="o">average</span> hash.</h1>
         <p class="hero-sub">Medical grade THC-A – lab-testet, høj styrke, gode vibes.</p>
         <div class="hero-actions">
-          <a class="btn btn-navy" href="/kollektion">Se kollektionen</a>
+          <a class="btn btn-navy" href="/shop">Shop nu</a>
           <a class="btn btn-ghost" href="/#find">Find os</a>
         </div>
       </div>
@@ -43,10 +43,10 @@ const promos = [
 
   <section class="block">
     <div class="wrap">
-      <SectionTitle title="Find din mellow" link={{ href: "/kollektion", label: "Se alle" }} />
+      <SectionTitle title="Find din mellow" link={{ href: "/shop", label: "Se alle" }} />
       <div class="rail cat-rail">
         {categories.map((c) => (
-          <a class="cat-tile" href={`/kollektion?kategori=${c.id}`}>
+          <a class="cat-tile" href={`/shop?kategori=${c.id}`}>
             <div class={`cat-media bg-${c.tint}`}><ProductVisual visual={c.visual} /></div>
             <span>{c.label}</span>
           </a>
@@ -73,7 +73,7 @@ const promos = [
 
   <section class="block">
     <div class="wrap">
-      <SectionTitle title="Mister Mellows favoritter" link={{ href: "/kollektion", label: "Se alle" }} />
+      <SectionTitle title="Mister Mellows favoritter" link={{ href: "/shop", label: "Se alle" }} />
       <div class="rail-wrap">
         <div class="rail product-rail" id="picks">
           {featured.map((p) => <ProductCard product={p} />)}
@@ -98,7 +98,7 @@ const promos = [
           <p>Hver sort er udvalgt hos betroede dyrkere for aroma, udseende og styrke, og alt er laboratorietestet, før det kommer i posen.</p>
           <p>Fra Cali Flower til Fresh Frozen og Dry Sift hash – lab-testet, høj styrke og gode vibes. Find din mellow.</p>
         </details>
-        <a class="btn btn-orange" href="/kollektion">Se kollektionen</a>
+        <a class="btn btn-orange" href="/shop">Gå til shoppen</a>
       </div>
     </div>
   </section>
