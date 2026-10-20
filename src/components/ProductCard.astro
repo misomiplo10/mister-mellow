@@ -1,0 +1,42 @@
+---
+import { kr, type Product } from "../data/products";
+
+interface Props {
+  product: Product;
+}
+
+const { product: p } = Astro.props;
+const v = p.visual;
+---
+
+<article class="product reveal" data-cat={p.category}>
+  <div class={`product-media bg-${p.tint}`}>
+    {v.kind === "pouch" && (
+      <div class={`pouch pouch-${v.color}`}>
+        <img src={`/img/logo-${v.logo}.png`} alt="" />
+        <span class="label">{p.name}</span>
+      </div>
+    )}
+    {v.kind === "tubes" && (
+      <div class="tube-duo">
+        {[0, 1].map(() => (
+          <div class={`tube tube-${v.color}`}>
+            <img src="/img/logo-navy.png" alt="" />
+            <span class="label">{p.name}</span>
+          </div>
+        ))}
+      </div>
+    )}
+    {v.kind === "photo" && <img src={v.src} alt={v.alt} loading="lazy" />}
+  </div>
+  <div class="product-body">
+    <span class="product-meta">{p.meta}</span>
+    <h3>{p.name}</h3>
+    <p>{p.description}</p>
+    {p.retail ? (
+      <div class="price">Vejl. udsalgspris <strong>{kr(p.retail)}</strong></div>
+    ) : (
+      <div class="price">Spørg i din butik <strong>{p.meta.split(" · ").at(-1)}</strong></div>
+    )}
+  </div>
+</article>

@@ -1,0 +1,141 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProductCard from "../components/ProductCard.astro";
+import { categories, products } from "../data/products";
+import { labName, labResults } from "../data/lab";
+import { company } from "../data/company";
+
+const marquee = ["Lab-testet", "Høj styrke", "Gode vibes", "Kun 18+", "Find din mellow"];
+const nav = [
+  { href: "#om", label: "Om os" },
+  { href: "#kollektionen", label: "Kollektionen" },
+  { href: "#lab", label: "Lab-rapporter" },
+  { href: "#find", label: "Find os" },
+];
+---
+
+<BaseLayout
+  title="Mister Mellow – Not your average hash"
+  description="Mister Mellow er et dansk brand med medical grade Cali-flower og hash med THC-A. Lab-testet, høj styrke, gode vibes. Kun 18+."
+  nav={nav}
+  cta={{ href: "/forhandler", label: "For forhandlere" }}
+>
+  <section class="hero" aria-label="Mister Mellow">
+    <div class="hero-ring" aria-hidden="true"></div>
+    <h1 class="hero-title wrap"><span>MISTER</span><span class="o">MELLOW</span></h1>
+    <div class="hero-bud"><img src="/img/bud-hero.webp" alt="Cali-flower knop" width="490" height="811" /></div>
+    <div class="hero-foot wrap">
+      <div>
+        <span class="tag">Cali flower · Infused THC-A</span>
+        <span class="script">{company.tagline}</span>
+      </div>
+      <div class="hero-actions">
+        <a class="btn btn-orange" href="#kollektionen">Se kollektionen</a>
+        <a class="btn btn-ghost" href="#lab">Lab-rapporter</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      {[...marquee, ...marquee].map((m) => <span>{m}</span>)}
+    </div>
+  </div>
+
+  <section id="om">
+    <div class="wrap about-grid">
+      <div class="about-copy reveal">
+        <p class="eyebrow">Mød Mister Mellow</p>
+        <h2 class="h2">Lidt highness <em>i hver pakke.</em></h2>
+        <p>Mister Mellow er et dansk brand med én mission: medical grade Cali-flower og hash – Fresh Frozen og Dry Sift – med THC-A.</p>
+        <p>Hver sort er udvalgt hos betroede dyrkere for aroma, udseende og styrke, og alt er laboratorietestet, før det kommer i posen.</p>
+        <div class="pillars">
+          <span class="pill">Lab-testet</span><span class="pill">Høj styrke</span><span class="pill">Gode vibes</span>
+        </div>
+      </div>
+      <div class="cats reveal">
+        <div class="cat"><img src="/img/flower-trio.jpg" alt="Cali Flower" loading="lazy" /><h3>Cali Flower</h3><small>INFUSED THC-A</small></div>
+        <div class="cat"><img src="/img/fresh-frozen.jpg" alt="Fresh Frozen Hash" loading="lazy" /><h3>Fresh Frozen</h3><small>INFUSED THC-A</small></div>
+        <div class="cat"><img src="/img/dry-sift.jpg" alt="Dry Sift Hash" loading="lazy" /><h3>Dry Sift</h3><small>THC-A</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="kollektionen" style="padding-top: 0">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Kollektionen</p>
+        <h2 class="h2">Find din <em>mellow.</em></h2>
+      </div>
+      <div class="filters reveal" role="group" aria-label="Filtrér produkter">
+        {categories.map((c, i) => (
+          <button class:list={["filter", { active: i === 0 }]} data-filter={c.id}>{c.label}</button>
+        ))}
+      </div>
+      <div class="products">
+        {products.map((p) => <ProductCard product={p} />)}
+      </div>
+    </div>
+  </section>
+
+  <section id="lab" class="on-dark">
+    <div class="wrap lab-grid">
+      <div class="reveal">
+        <p class="eyebrow">Laboratorierapporter</p>
+        <h2 class="h2">Fuld <em>gennemsigtighed.</em></h2>
+        <p class="lead" style="margin-top: 22px">Alt, hvad der kommer i posen, er testet af et uafhængigt laboratorium først. Se tallene selv – eller hent de fulde rapporter.</p>
+        <div class="lab-badges">
+          <div class="badge"><b>EMA</b><span>akkrediteret laboratorium</span></div>
+          <div class="badge"><b>GMP</b><span>certificeret analyse</span></div>
+        </div>
+      </div>
+      <div class="lab-card reveal">
+        <table class="lab-table">
+          <thead><tr><th>Sort</th><th>THC-A</th><th>Δ9-THC</th><th>CBD</th></tr></thead>
+          <tbody>
+            {labResults.map((r) => (
+              <tr><td>{r.strain}</td><td class="hi">{r.thca}</td><td>{r.d9thc}</td><td>{r.cbd}</td></tr>
+            ))}
+          </tbody>
+        </table>
+        <p class="lab-note">Analyseret af {labName}.</p>
+        <div class="lab-dl">
+          {labResults.map((r, i) => (
+            <a class:list={["btn", i === 0 ? "btn-orange" : "btn-ghost"]} href={r.coa} target="_blank" rel="noopener">{r.strain} COA ↓</a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="vibe" id="find">
+    <div class="vibe-grid">
+      <div class="vibe-img" role="img" aria-label="Mister Mellow THCA premium flower"></div>
+      <div class="vibe-copy reveal">
+        <p class="eyebrow" style="color: var(--butter)">Find os</p>
+        <h2 class="h2">A little highness <em>in every pack.</em></h2>
+        <p>Mister Mellow fås hos udvalgte butikker. Spørg efter os ved kassen – eller følg med på Instagram for nye sorter, drops og hvor du finder os.</p>
+        <a class="btn btn-orange" href={company.instagramUrl} target="_blank" rel="noopener">{company.instagram} på Instagram</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="teaser reveal">
+        <div>
+          <p class="eyebrow">For forhandlere</p>
+          <h2 class="h2">Sæt Mister Mellow <em>på hylden.</em></h2>
+          <p>Driver du butik? Vi leverer personligt inden for 1–2 dage, og displayet sælger for dig ved kassen.</p>
+          <ul class="ticks">
+            <li>Opstartspakke fra 4.640 kr ekskl. moms – inkl. display</li>
+            <li>Op til 51 % dækningsgrad på pre-rolls</li>
+            <li>Lab-rapporter, du kan vise dine kunder</li>
+          </ul>
+          <a class="btn btn-navy" href="/forhandler">Bliv forhandler →</a>
+        </div>
+        <img src="/img/display.jpg" alt="Mister Mellow butiksdisplay" loading="lazy" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

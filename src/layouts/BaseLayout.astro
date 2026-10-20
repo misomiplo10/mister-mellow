@@ -1,0 +1,42 @@
+---
+import "../styles/global.css";
+import AgeGate from "../components/AgeGate.astro";
+import Header, { type NavLink } from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  nav: NavLink[];
+  cta: NavLink;
+}
+
+const { title, description, nav, cta } = Astro.props;
+---
+
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0f2167" />
+    <link rel="icon" href="/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;600;700;800&family=Cormorant+Garamond:ital,wght@1,500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <AgeGate />
+    <Header links={nav} cta={cta} />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    <script src="../scripts/main.ts"></script>
+  </body>
+</html>

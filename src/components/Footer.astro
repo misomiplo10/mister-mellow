@@ -1,0 +1,41 @@
+---
+import { company } from "../data/company";
+---
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <img src="/img/logo-orange.png" alt="Mister Mellow" />
+        <p>Medical grade Cali-flower og hash med THC-A. Lab-testet, høj styrke, gode vibes.</p>
+      </div>
+      <div>
+        <h4>Udforsk</h4>
+        <ul>
+          <li><a href="/#kollektionen">Kollektionen</a></li>
+          <li><a href="/#lab">Lab-rapporter</a></li>
+          <li><a href="/#om">Om os</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Forhandlere</h4>
+        <ul>
+          <li><a href="/forhandler">Bliv forhandler</a></li>
+          <li><a href={company.catalog} target="_blank" rel="noopener">Katalog 2026 (PDF)</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <ul>
+          <li><a href={company.phoneHref}>{company.phone}</a></li>
+          <li><a href={`mailto:${company.email}`}>{company.email}</a></li>
+          <li><a href={company.instagramUrl} target="_blank" rel="noopener">{company.instagram}</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>{company.legalName} · CVR {company.cvr}</span>
+      <span>Kun 18+ · Opbevares utilgængeligt for børn</span>
+    </div>
+  </div>
+</footer>
