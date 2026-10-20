@@ -116,10 +116,7 @@ function closeDrawer() {
 
 function render() {
   const n = count();
-  document.querySelectorAll<HTMLElement>("[data-cart-count]").forEach((el) => {
-    el.textContent = String(n);
-    el.hidden = n === 0;
-  });
+  document.querySelectorAll<HTMLElement>("[data-cart-count]").forEach((el) => (el.textContent = String(n)));
   document.querySelectorAll<HTMLElement>("[data-cart-subtotal]").forEach((el) => (el.textContent = kr(subtotal())));
   document.querySelectorAll<HTMLElement>("[data-cart-empty]").forEach((el) => (el.hidden = n > 0));
   document.querySelectorAll<HTMLElement>("[data-cart-filled]").forEach((el) => (el.hidden = n === 0));

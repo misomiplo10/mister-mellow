@@ -37,7 +37,7 @@ export const categories: CategoryInfo[] = [
   { id: "flower", label: "Flower", tint: "lavender", visual: { kind: "photo", src: "/img/flower-trio.jpg", alt: "" } },
   { id: "preroll", label: "Pre-rolls", tint: "pink", visual: { kind: "tubes", color: "pink", label: "" } },
   { id: "hash", label: "Hash", tint: "peach", visual: { kind: "photo", src: "/img/fresh-frozen.jpg", alt: "" } },
-  { id: "edible", label: "Edibles", tint: "butter", visual: { kind: "photo", src: "/img/chocolate-cone.jpg", alt: "" } },
+  { id: "edible", label: "Edibles", tint: "butter", visual: { kind: "photo", src: "/img/chocolate-cone-cut.webp", alt: "" } },
   { id: "accessory", label: "Tilbehør", tint: "peach", visual: { kind: "lighter" } },
 ];
 
@@ -130,7 +130,7 @@ export const products: Product[] = [
     description: "Infused med THC-A. Fremstilles udelukkende på bestilling.",
     onRequest: true,
     tint: "butter",
-    visual: { kind: "photo", src: "/img/chocolate-cone.jpg", alt: "Chocolate Cone" },
+    visual: { kind: "photo", src: "/img/chocolate-cone-cut.webp", alt: "Chocolate Cone" },
   },
   {
     slug: "mister-mellow-lighter",

@@ -5,19 +5,13 @@ import { company } from "../data/company";
 const links = [
   { href: "/#lab", label: "Lab-rapporter" },
   { href: "/#om", label: "Om os" },
-  { href: "/#faq", label: "FAQ" },
-  { href: "/#find", label: "Find os" },
+  { href: "/forhandler", label: "Forhandlere" },
 ];
 ---
 
 <header class="site-header">
-  <div class="announce">
-    <div class="wrap">
-      <span>Lab-testet af LabCore</span><span>Kun 18+</span><span class="hide-sm">Nye drops på {company.instagram}</span>
-    </div>
-  </div>
   <nav class="nav wrap" aria-label="Hovedmenu">
-    <a class="brand" href="/" aria-label="Mister Mellow forside"><img src="/img/logo-orange.png" alt="Mister Mellow" /></a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
     <ul class="nav-links">
       <li class="has-menu">
         <a href="/shop">Shop <span class="caret" aria-hidden="true">▾</span></a>
@@ -27,22 +21,20 @@ const links = [
         </ul>
       </li>
       {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
-      <li class="show-md"><a href="/forhandler">For forhandlere</a></li>
     </ul>
+    <a class="brand" href="/" aria-label="Mister Mellow forside"><img src="/img/logo-orange.png" alt="Mister Mellow" /></a>
     <div class="nav-actions">
       <a class="icon-btn" href={company.instagramUrl} target="_blank" rel="noopener" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
           <rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1" fill="currentColor"></circle>
         </svg>
       </a>
-      <a class="btn btn-ghost-light btn-sm hide-md" href="/forhandler">Forhandler</a>
       <button class="cart-btn" data-cart-open aria-label="Åbn kurv">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
           <path d="M6 7h12l-1 13H7L6 7z"></path><path d="M9 7a3 3 0 0 1 6 0"></path>
         </svg>
-        <span class="cart-count" data-cart-count hidden>0</span>
+        <span class="cart-count" data-cart-count>0</span>
       </button>
-      <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </nav>
 </header>

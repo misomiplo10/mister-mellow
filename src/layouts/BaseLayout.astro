@@ -22,12 +22,8 @@ const { title, description } = Astro.props;
     <meta name="description" content={description} />
     <meta name="theme-color" content="#0f2167" />
     <link rel="icon" href="/favicon.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;600;700;800&family=Cormorant+Garamond:ital,wght@1,500&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" href="/fonts/petrona-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/petrona-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
   </head>
   <body>
     <AgeGate />

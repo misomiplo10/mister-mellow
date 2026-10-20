@@ -51,7 +51,7 @@ const count = document.getElementById("count");
 const applyFilter = (cat: string) => {
   let shown = 0;
   filters.forEach((b) => b.classList.toggle("active", b.dataset.filter === cat));
-  document.querySelectorAll<HTMLElement>(".product-grid .pcard").forEach((p) => {
+  document.querySelectorAll<HTMLElement>(".product-grid [data-cat]").forEach((p) => {
     p.hidden = cat !== "all" && p.dataset.cat !== cat;
     if (!p.hidden) shown++;
   });

@@ -1,8 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import ProductCard from "../../components/ProductCard.astro";
+import Collection from "../../components/Collection.astro";
 import ProductVisual from "../../components/ProductVisual.astro";
-import SectionTitle from "../../components/SectionTitle.astro";
 import { cartData, categoryLabel, isBuyable, kr, metaLine, products, type Product } from "../../data/products";
 import { labName } from "../../data/lab";
 
@@ -21,7 +20,7 @@ const related = [...sameCategory, ...products.filter((x) => x.slug !== p.slug &&
 ---
 
 <BaseLayout title={`${p.name} – Mister Mellow`} description={`${p.name}: ${p.description}`}>
-  <section class="block page-top">
+  <section class="collection page-top">
     <div class="wrap">
       <nav class="crumbs" aria-label="Brødkrumme">
         <a href="/shop">Shop</a><span>/</span><a href={`/shop?kategori=${p.category}`}>{categoryLabel(p.category)}</a><span>/</span><span>{p.name}</span>
@@ -72,15 +71,15 @@ const related = [...sameCategory, ...products.filter((x) => x.slug !== p.slug &&
 
           <div class="faq pdp-acc">
             <details>
-              <summary>Opbevaring<span class="faq-ico" aria-hidden="true">›</span></summary>
+              <summary>Opbevaring<span class="faq-ico" aria-hidden="true">+</span></summary>
               <p>Opbevar køligt, tørt og mørkt i lukket emballage. THC-A omdannes gradvist ved varme og lys, så undgå vinduer og varmekilder.</p>
             </details>
             <details>
-              <summary>Lab-rapporter<span class="faq-ico" aria-hidden="true">›</span></summary>
+              <summary>Lab-rapporter<span class="faq-ico" aria-hidden="true">+</span></summary>
               <p>Alt testes af {labName}, før det kommer i posen. <a href="/#lab">Se rapporterne</a>.</p>
             </details>
             <details>
-              <summary>Ansvarligt brug<span class="faq-ico" aria-hidden="true">›</span></summary>
+              <summary>Ansvarligt brug<span class="faq-ico" aria-hidden="true">+</span></summary>
               <p>Kun til personer over 18 år. Opbevares utilgængeligt for børn.</p>
             </details>
           </div>
@@ -89,16 +88,7 @@ const related = [...sameCategory, ...products.filter((x) => x.slug !== p.slug &&
     </div>
   </section>
 
-  {related.length > 0 && (
-    <section class="block">
-      <div class="wrap">
-        <SectionTitle title="Du vil måske også kunne lide" link={{ href: "/shop", label: "Se alle" }} />
-        <div class="rail product-rail" id="related">
-          {related.map((r) => <ProductCard product={r} />)}
-        </div>
-      </div>
-    </section>
-  )}
+  {related.length > 0 && <Collection title="Du vil måske også kunne lide" products={related} link="/shop" />}
 </BaseLayout>
 
 <script>

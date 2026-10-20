@@ -1,0 +1,24 @@
+---
+import ProductTile from "./ProductTile.astro";
+import type { Product } from "../data/products";
+
+interface Props {
+  title: string;
+  products: Product[];
+  link?: string;
+}
+
+const { title, products, link } = Astro.props;
+---
+
+<section class="collection">
+  <div class="wrap">
+    <div class="collection-head">
+      <h2>{title}</h2>
+      {link && <a href={link}>Se alle</a>}
+    </div>
+    <div class="tile-grid">
+      {products.map((p) => <ProductTile product={p} />)}
+    </div>
+  </div>
+</section>

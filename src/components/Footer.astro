@@ -6,15 +6,19 @@ import { company } from "../data/company";
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <img src="/img/logo-orange.png" alt="Mister Mellow" />
-        <p>Medical grade Cali-flower og hash med THC-A. Lab-testet, høj styrke, gode vibes.</p>
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="/shop">Alle produkter</a></li>
+          <li><a href="/shop?kategori=flower">Flower</a></li>
+          <li><a href="/shop?kategori=preroll">Pre-rolls</a></li>
+          <li><a href="/shop?kategori=hash">Hash</a></li>
+        </ul>
       </div>
       <div>
-        <h4>Navigation</h4>
+        <h4>Info</h4>
         <ul>
-          <li><a href="/shop">Shop</a></li>
           <li><a href="/#lab">Lab-rapporter</a></li>
-          <li><a href="/#om">Om os</a></li>
+          <li><a href="/#om">Om Mister Mellow</a></li>
           <li><a href="/#faq">FAQ</a></li>
         </ul>
       </div>
@@ -36,8 +40,10 @@ import { company } from "../data/company";
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© {new Date().getFullYear()} {company.legalName} · CVR {company.cvr}</span>
-      <span>Kun 18+ · Opbevares utilgængeligt for børn</span>
+      <img src="/img/logo-navy.png" alt="Mister Mellow" />
+      <span>© {new Date().getFullYear()} {company.legalName} · CVR {company.cvr} · Kun 18+</span>
     </div>
   </div>
 </footer>
+
+<a class="join-pill" href={company.instagramUrl} target="_blank" rel="noopener">Følg os <span aria-hidden="true">→</span></a>

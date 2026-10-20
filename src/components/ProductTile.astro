@@ -1,0 +1,21 @@
+---
+import ProductVisual from "./ProductVisual.astro";
+import { isBuyable, kr, productUrl, type Product } from "../data/products";
+
+interface Props {
+  product: Product;
+}
+
+const { product: p } = Astro.props;
+const buyable = isBuyable(p);
+---
+
+<a class="tile" href={productUrl(p)} data-cat={p.category}>
+  <div class="tile-media">
+    <ProductVisual visual={p.visual} />
+  </div>
+  <span class="tile-name">{p.name}{p.size && ` – ${p.size}`}</span>
+  <span class:list={["tile-price", { soon: !buyable }]}>
+    {buyable ? kr(p.retail!) : p.onRequest ? "På bestilling" : "Kommer snart"}
+  </span>
+</a>
