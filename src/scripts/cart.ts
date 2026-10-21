@@ -1,6 +1,10 @@
+import { company } from "../data/company";
+
 // Cart kept in localStorage (per browser). Storage can be unavailable (private mode), so every
 // read/write is guarded and the cart then simply lives for the page view.
 export interface CartItem {
+  /** Line identity: product slug, plus size for products sold in several sizes */
+  key?: string;
   slug: string;
   name: string;
   price: number;
@@ -37,20 +41,22 @@ export const subtotal = () => items.reduce((n, i) => n + i.qty * i.price, 0);
 const en = document.documentElement.lang === "en";
 const shopPath = en ? "/en/shop" : "/shop";
 const t = en
-  ? { qty: "Quantity", fewer: "Fewer", more: "More", remove: "Remove" }
-  : { qty: "Antal", fewer: "Færre", more: "Flere", remove: "Fjern" };
+  ? { qty: "Quantity", fewer: "Fewer", more: "More", remove: "Remove", shipLeft: (x: string) => `You're <strong>${x}</strong> away from free shipping`, shipFree: "You've got <strong>free shipping</strong>!" }
+  : { qty: "Antal", fewer: "Færre", more: "Flere", remove: "Fjern", shipLeft: (x: string) => `Du mangler <strong>${x}</strong> for fri fragt`, shipFree: "Du har <strong>fri fragt</strong>!" };
 export const kr = (n: number) => (en ? `DKK ${n.toLocaleString("en-GB")}` : `${n.toLocaleString("da-DK")} kr`);
 export const onChange = (fn: () => void) => listeners.add(fn);
 
+const keyOf = (i: { key?: string; slug: string }) => i.key ?? i.slug;
+
 export function add(item: Omit<CartItem, "qty">, qty = 1) {
-  const existing = items.find((i) => i.slug === item.slug);
+  const existing = items.find((i) => keyOf(i) === keyOf(item));
   if (existing) existing.qty = Math.min(MAX_QTY, existing.qty + qty);
   else items = [...items, { ...item, qty: Math.min(MAX_QTY, qty) }];
   commit();
 }
 
-export function setQty(slug: string, qty: number) {
-  items = qty <= 0 ? items.filter((i) => i.slug !== slug) : items.map((i) => (i.slug === slug ? { ...i, qty: Math.min(MAX_QTY, qty) } : i));
+export function setQty(key: string, qty: number) {
+  items = qty <= 0 ? items.filter((i) => keyOf(i) !== key) : items.map((i) => (keyOf(i) === key ? { ...i, qty: Math.min(MAX_QTY, qty) } : i));
   commit();
 }
 
@@ -66,7 +72,7 @@ window.addEventListener("storage", (e) => {
 export function lineHtml(i: CartItem) {
   const esc = (s: string) => s.replace(/[&<>"]/g, (c) => `&#${c.charCodeAt(0)};`);
   return `
-    <div class="cart-line" data-slug="${esc(i.slug)}">
+    <div class="cart-line" data-key="${esc(keyOf(i))}">
       <a class="cart-thumb bg-${esc(i.tint)}" href="${shopPath}/${esc(i.slug)}"><img src="${esc(i.thumb)}" alt="" /></a>
       <div class="cart-info">
         <a class="cart-name" href="${shopPath}/${esc(i.slug)}">${esc(i.name)}</a>
@@ -90,12 +96,12 @@ export function bindLines(container: HTMLElement) {
     const t = e.target as HTMLElement;
     const line = t.closest<HTMLElement>(".cart-line");
     if (!line) return;
-    const slug = line.dataset.slug!;
-    const item = items.find((i) => i.slug === slug);
+    const key = line.dataset.key!;
+    const item = items.find((i) => keyOf(i) === key);
     if (!item) return;
-    if (t.closest("[data-remove]")) setQty(slug, 0);
+    if (t.closest("[data-remove]")) setQty(key, 0);
     const step = t.closest<HTMLElement>("[data-qty]");
-    if (step) setQty(slug, item.qty + Number(step.dataset.qty));
+    if (step) setQty(key, item.qty + Number(step.dataset.qty));
   });
 }
 
@@ -126,6 +132,15 @@ function render() {
     el.hidden = n === 0;
   });
   document.querySelectorAll<HTMLElement>("[data-cart-subtotal]").forEach((el) => (el.textContent = kr(subtotal())));
+  // Free shipping from company.freeShippingOver kr (incl. moms) and up
+  const sub = subtotal();
+  const left = Math.max(0, company.freeShippingOver - sub);
+  document.querySelectorAll<HTMLElement>("[data-ship-meter]").forEach((m) => {
+    m.classList.toggle("done", left === 0);
+    m.querySelector("[data-ship-text]")!.innerHTML = left === 0 ? t.shipFree : t.shipLeft(kr(left));
+    m.querySelector<HTMLElement>("[data-ship-fill]")!.style.width = `${Math.min(100, (sub / company.freeShippingOver) * 100)}%`;
+  });
+  document.querySelectorAll<HTMLElement>("[data-ship-cost]").forEach((el) => (el.textContent = left === 0 ? el.dataset.free! : el.dataset.later!));
   document.querySelectorAll<HTMLElement>("[data-cart-empty]").forEach((el) => (el.hidden = n > 0));
   document.querySelectorAll<HTMLElement>("[data-cart-filled]").forEach((el) => (el.hidden = n === 0));
   if (drawerLines) drawerLines.innerHTML = items.map(lineHtml).join("");
